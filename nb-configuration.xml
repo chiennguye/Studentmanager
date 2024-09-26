@@ -15,4 +15,13 @@ Any value defined here will override the pom.xml file value but is only applicab
 -->
         <org-netbeans-modules-javascript2-requirejs.enabled>true</org-netbeans-modules-javascript2-requirejs.enabled>
     </properties>
+    <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+        <word>jdbc</word>
+        <word>localhost</word>
+        <word>MySQL</word>
+        <word>serverTimezone</word>
+        <word>studentmanage</word>
+        <word>studentmanager</word>
+        <word>useSSL</word>
+    </spellchecker-wordlist>
 </project-shared-configuration>
