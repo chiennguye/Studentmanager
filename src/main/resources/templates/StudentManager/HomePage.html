@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Chiếm toàn bộ chiều cao của cửa sổ */
+            margin: 0; /* Bỏ margin của body */
+        }
+        header {
+            background: #ffffff; /* Màu nền của header */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho header */
+        }
+        footer {
+            background: #ffffff; /* Màu nền của footer */
+            padding: 10px 0;
+            margin-top: auto; /* Đẩy footer xuống dưới */
+            width: 100%;
+            text-align: center; /* Canh giữa nội dung footer */
+        }
+        .content {
+            overflow-y: auto; /* Cho phép cuộn dọc */
+            flex: 1; /* Chiếm không gian còn lại */
+            padding: 20px;
+        }
+        /* Ẩn thanh cuộn trên tất cả các trình duyệt */
+        .content::-webkit-scrollbar {
+            display: none; /* Ẩn thanh cuộn trên Chrome, Safari và các trình duyệt WebKit */
+        }
+        .content {
+            scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+        }
+        .navbar {
+            margin-bottom: 0; /* Đặt margin-bottom của navbar về 0 */
+        }
+        .card {
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+            position: relative;
+        }
+        .card.selected {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Student Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Grades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Timetable</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="content">
+    <h1 class="text-center">Welcome to the Student Management System</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" onclick="selectCard(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Students</h5>
+                    <p class="card-text">View, add, edit, or delete student records.</p>
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-secondary">Edit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" onclick="selectCard(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Courses</h5>
+                    <p class="card-text">View and manage courses offered by the institution.</p>
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-secondary">Edit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" onclick="selectCard(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Classes</h5>
+                    <p class="card-text">Create and manage different classes for students.</p>
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-secondary">Edit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" onclick="selectCard(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Grades</h5>
+                    <p class="card-text">View and manage students' grades and assessments.</p>
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-secondary">Edit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" onclick="selectCard(this)">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Timetable</h5>
+                    <p class="card-text">View and manage the class timetable for students.</p>
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-secondary">Edit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" onclick="selectCard(this)">
+                <div class="card-body">
+                    <h5 class="card-title">View Reports</h5>
+                    <p class="card-text">Generate reports on student performance and attendance.</p>
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-secondary">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer">
+        <p>&copy; 2024 Student Management System. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function selectCard(card) {
+        // Xóa lớp 'selected' khỏi tất cả các thẻ
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(c => c.classList.remove('selected'));
+        
+        // Thêm lớp 'selected' vào thẻ được chọn
+        card.classList.add('selected');
+    }
+</script>
+</body>
+</html>

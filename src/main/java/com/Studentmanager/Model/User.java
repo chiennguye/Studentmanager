@@ -9,20 +9,30 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 /**
  *
  * @author chienkoi
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
+    @NotBlank(message = "Email cannot be blank!!!")
+    @Email(message = "Email not valid!!")
     private String email;
+    @NotBlank(message = "Password cannot be blank!!!")
+    @Size(min = 8, message = "Password have to 8 charator!!!")
     private String password;
+
+    @NotBlank(message = "User cannot be blank!!!")
+    @Size(min = 2, max = 30, message = "Username have to from 2 to 30 charator!!!")
     private String username;
 
     public int getId() {
@@ -61,7 +71,5 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", email=" + email + ", password=" + password + ", username=" + username + '}';
     }
-    
-    
-    
+
 }
