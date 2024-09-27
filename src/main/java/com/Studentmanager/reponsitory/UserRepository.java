@@ -6,8 +6,9 @@ package com.Studentmanager.reponsitory;
 
 import com.Studentmanager.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    // Bạn có thể thêm phương thức tùy chỉnh nếu cần, ví dụ như findByEmail
+    
     User findByEmail(String email);
 }

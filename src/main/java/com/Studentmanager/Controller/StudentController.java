@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author chienkoi
  */
 @Controller
-@RequestMapping(value = "/LandingPage")
+@RequestMapping(value = "/StudentManager")
 public class StudentController {
-    
+
     @GetMapping("/index.html")
-    
-    public String index(){
-        return "LandingPage/index";
+
+    public String index() {
+        return "StudentManager/index";
     }
-     
+
 }

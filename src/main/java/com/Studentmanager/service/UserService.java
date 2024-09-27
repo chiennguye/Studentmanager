@@ -19,11 +19,17 @@ public class UserService {
     private UserRepository userRepository;
 
     public String registerUser(User user) {
-        // Bạn có thể kiểm tra xem email đã tồn tại chưa trước khi lưu
+        // Kiểm tra xem email đã tồn tại chưa trước khi lưu
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            return "Email đã tồn tại !!!";
+            return " Email đã tồn tại !!!";
         }
         userRepository.save(user);
-        return "Đăng ký thành công !!!";
+        return " Đăng ký thành công !!!";
     }
+
+    public boolean login(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        return user != null && user.getPassword().equals(password);
+    }
+
 }

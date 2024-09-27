@@ -44,18 +44,21 @@
             <!-- Register Form -->
             <div class="form-box">
                 <h3 class="text-center">Register</h3>
-                <form th:action="@{/LandingPage/register.html}" th:object="${user}" method="post" >
+                <form th:action="@{/StudentManager/register.html}" th:object="${user}" method="post" >
                     <div class="mb-3">
                         <label for="registerName" class="form-label">Full Name</label>
                         <input type="text" class="form-control" th:field="*{username}" required placeholder="Enter your full name"/>
+                        <div th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{uername}"></div>
                     </div>
                     <div class="mb-3">
                         <label for="registerEmail" class="form-label">Email address</label>
                         <input type="email" class="form-control" th:field="*{email}" placeholder="Enter your email">
+                        <div th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></div>                        
                     </div>
                     <div class="mb-3">
                         <label for="registerPassword" class="form-label">Password</label>
                         <input type="password" class="form-control" th:field="*{password}" placeholder="Create a password">
+                        <div th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></div>       
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Register</button>
                 </form>
