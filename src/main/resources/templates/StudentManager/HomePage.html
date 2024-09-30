@@ -1,87 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
+    <title>Student Management System - Home</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f4f4f4;
+        .navbar {
+            background-color: #007bff; /* Màu xanh cho header */
+        }
+        .navbar .nav-link, .navbar .navbar-brand {
+            color: white !important;
+        }
+        .navbar .user-info {
+            color: white;
+            margin-right: 15px;
             display: flex;
-            flex-direction: column;
-            height: 100vh; /* Chiếm toàn bộ chiều cao của cửa sổ */
-            margin: 0; /* Bỏ margin của body */
+            align-items: center;
         }
-        header {
-            background: #ffffff; /* Màu nền của header */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho header */
+        .sidebar {
+            background-color: #343a40; /* Màu tối hơn cho sidebar */
+            height: 100vh;
+            padding: 20px;
+            border-right: 1px solid #dee2e6;
         }
-        footer {
-            background: #ffffff; /* Màu nền của footer */
+        .sidebar h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: white;
+        }
+        .sidebar a {
+            color: #adb5bd;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
             padding: 10px 0;
-            margin-top: auto; /* Đẩy footer xuống dưới */
-            width: 100%;
-            text-align: center; /* Canh giữa nội dung footer */
+            font-size: 1.1rem;
         }
-        .content {
-            overflow-y: auto; /* Cho phép cuộn dọc */
-            flex: 1; /* Chiếm không gian còn lại */
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+            color: white;
+            border-radius: 5px;
+        }
+        .main-content {
             padding: 20px;
         }
-        /* Ẩn thanh cuộn trên tất cả các trình duyệt */
-        .content::-webkit-scrollbar {
-            display: none; /* Ẩn thanh cuộn trên Chrome, Safari và các trình duyệt WebKit */
-        }
-        .content {
-            scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
-        }
-        .navbar {
-            margin-bottom: 0; /* Đặt margin-bottom của navbar về 0 */
-        }
-        .card {
-            margin: 10px;
-            cursor: pointer;
-            transition: transform 0.5s ease;
-            position: relative;
-        }
-        .card.selected {
-            transform: scale(1.1);
-            z-index: 1;
+        footer {
+            background-color: #000000; /* Màu đen cho footer */
+            color: white;
+            padding: 20px 0;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Student Management</a>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="HomePage.html">Student Manager</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <!-- Hiển thị tên người dùng và căn giữa -->
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Students</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Classes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Grades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Reports</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Timetable</a>
+                       <a href ="login.html"> <span class="user-info">Nguyễn Minh Chiến</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.html">Logout</a>
@@ -90,90 +80,71 @@
             </div>
         </div>
     </nav>
-</header>
 
-<div class="content">
-    <h1 class="text-center">Welcome to the Student Management System</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card" onclick="selectCard(this)">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Students</h5>
-                    <p class="card-text">View, add, edit, or delete student records.</p>
-                    <button class="btn btn-primary">View</button>
-                    <button class="btn btn-secondary">Edit</button>
-                </div>
+    <!-- Main Layout with Sidebar and Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar (Left) -->
+            <div class="col-md-3 sidebar">
+                <h3><i class="bi bi-list" style="margin-top: 10px;"></i>   Management</h3>
+                <a href="#"><i class="bi bi-people-fill"></i> Manage Students</a>
+                <a href="#"><i class="bi bi-person-fill"></i> Manage Teachers</a>
+                <a href="#"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
+                <a href="#"><i class="bi bi-bar-chart-fill"></i> View Reports</a>
+                <a href="#"><i class="bi bi-award-fill"></i> Manage Grades</a> <!-- Thêm chức năng Quản lý điểm -->
+                <a href="#"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
+                <a href="#"> <i class="bi bi-gear"></i> Settings</a>
+
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card" onclick="selectCard(this)">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Courses</h5>
-                    <p class="card-text">View and manage courses offered by the institution.</p>
-                    <button class="btn btn-primary">View</button>
-                    <button class="btn btn-secondary">Edit</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card" onclick="selectCard(this)">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Classes</h5>
-                    <p class="card-text">Create and manage different classes for students.</p>
-                    <button class="btn btn-primary">View</button>
-                    <button class="btn btn-secondary">Edit</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card" onclick="selectCard(this)">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Grades</h5>
-                    <p class="card-text">View and manage students' grades and assessments.</p>
-                    <button class="btn btn-primary">View</button>
-                    <button class="btn btn-secondary">Edit</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card" onclick="selectCard(this)">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Timetable</h5>
-                    <p class="card-text">View and manage the class timetable for students.</p>
-                    <button class="btn btn-primary">View</button>
-                    <button class="btn btn-secondary">Edit</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card" onclick="selectCard(this)">
-                <div class="card-body">
-                    <h5 class="card-title">View Reports</h5>
-                    <p class="card-text">Generate reports on student performance and attendance.</p>
-                    <button class="btn btn-primary">View</button>
-                    <button class="btn btn-secondary">Edit</button>
-                </div>
+
+            <!-- Main Content (Right) -->
+            <div class="col-md-9 main-content">
+                <h2>Dashboard</h2>
+                <p>This section can show tables or information about students, teachers, courses, etc.</p>
+
+                <!-- Example Table -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>16</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>17</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Bob Johnson</td>
+                            <td>18</td>
+                            <td>12</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
 
-<footer>
-    <div class="footer">
-        <p>&copy; 2024 Student Management System. All rights reserved.</p>
-    </div>
-</footer>
+    <!-- Footer Section -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2024 Student Management System. All rights reserved.</p>
+        </div>
+    </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function selectCard(card) {
-        // Xóa lớp 'selected' khỏi tất cả các thẻ
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(c => c.classList.remove('selected'));
-        
-        // Thêm lớp 'selected' vào thẻ được chọn
-        card.classList.add('selected');
-    }
-</script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

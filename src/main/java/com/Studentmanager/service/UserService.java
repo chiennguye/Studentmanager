@@ -1,35 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Studentmanager.service;
 
 import com.Studentmanager.Model.User;
 import com.Studentmanager.reponsitory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author chienkoi
- */
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
-    public String registerUser(User user) {
-        // Kiểm tra xem email đã tồn tại chưa trước khi lưu
+    @Autowired
+    private PasswordEncoder passwordEncoder; // Sử dụng PasswordEncoder đã tiêm từ SecurityConfig
+
+    // Đăng ký người dùng mới
+    public String register(User user) {
+        // Kiểm tra nếu email đã tồn tại
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            return " Email đã tồn tại !!!";
+            return "Email đã tồn tại."; // Trả về thông báo lỗi
         }
-        userRepository.save(user);
-        return " Đăng ký thành công !!!";
+
+        // Mã hóa mật khẩu
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword); // Đặt mật khẩu đã mã hóa vào đối tượng User
+        userRepository.save(user); // Lưu người dùng vào CSDL
+
+        return "Đăng ký thành công!"; // Trả về thông báo thành công
     }
 
-    public boolean login(String email, String password) {
-        User user = userRepository.findByEmail(email);
-        return user != null && user.getPassword().equals(password);
+    // Tìm người dùng theo email
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
+    // Xác thực người dùng khi đăng nhập
+
+    // Phương thức xác thực người dùng
+    public boolean checkLogin(String rawPassword, String encodedPasswordFromDB) {
+        return passwordEncoder.matches(rawPassword, encodedPasswordFromDB);
+    }
 }

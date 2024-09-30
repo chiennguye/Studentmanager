@@ -11,16 +11,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudentmanagerApplication implements CommandLineRunner{
-    
-        @Autowired
+public class StudentmanagerApplication implements CommandLineRunner {
+
+    @Autowired
     private DataSource dataSource;
-            @Autowired
+    @Autowired
     private UserRepository userRepository; // Inject UserRepository
 
-	public static void main(String[] args) {
-		SpringApplication.run(StudentmanagerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StudentmanagerApplication.class, args);
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -35,7 +35,7 @@ public class StudentmanagerApplication implements CommandLineRunner{
             System.out.println("Lỗi kết nối MySQL: " + e.getMessage());
         }
 
-         // Lấy tất cả người dùng từ cơ sở dữ liệu
+        // Lấy tất cả người dùng từ cơ sở dữ liệu
         List<User> users = userRepository.findAll();
 
         // Kiểm tra và in ra danh sách người dùng
